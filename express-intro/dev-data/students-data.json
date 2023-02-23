@@ -1,0 +1,32 @@
+[
+  {
+    "id": 0,
+    "name": "Ayobami Owoeye",
+    "stack": "MERN"
+  },
+  {
+    "id": 1,
+    "name": "Feranmi Ogunyileka",
+    "stack": "PEAN"
+  },
+  {
+    "id": 2,
+    "name": "Charles Afo",
+    "stack": "MERN"
+  },
+  {
+    "id": 3,
+    "name": "Chima Francis",
+    "stack": "MERN"
+  },
+  {
+    "id": 4,
+    "name": "Faremi Tunde",
+    "stack": "MERN"
+  },
+  {
+    "id": 5,
+    "name": "Ahmad Bilesanmi",
+    "stack": "MERN"
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "name": "learning-express",
+  "version": "1.0.0",
+  "description": "A brief description of express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ayobami Owoeye",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
