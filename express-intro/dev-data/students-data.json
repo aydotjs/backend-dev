@@ -1,32 +1,9 @@
 [
-  {
-    "id": 0,
-    "name": "Ayobami Owoeye",
-    "stack": "MERN"
-  },
-  {
-    "id": 1,
-    "name": "Feranmi Ogunyileka",
-    "stack": "PEAN"
-  },
-  {
-    "id": 2,
-    "name": "Charles Afo",
-    "stack": "MERN"
-  },
-  {
-    "id": 3,
-    "name": "Chima Francis",
-    "stack": "MERN"
-  },
-  {
-    "id": 4,
-    "name": "Faremi Tunde",
-    "stack": "MERN"
-  },
-  {
-    "id": 5,
-    "name": "Ahmad Bilesanmi",
-    "stack": "MERN"
-  }
+  { "id": 1, "name": "Afo Charles", "stack": "LAMP" },
+  { "id": 2, "name": "Chinma Francis", "stack": "PEAN" },
+  { "id": 3, "name": "Ogunyileka Feranmi", "stack": "MERN" },
+  { "id": 4, "name": "Faremi Tunde", "stack": "LAMP" },
+  { "id": 5, "name": "Ahmad Bilesanmi", "stack": "LAMP" },
+  { "id": 6, "name": "Ciroma Kate", "stack": "LAMP" },
+  { "id": 7, "name": "Ogunyileka Feranmi", "stack": "MERN" }
 ]
