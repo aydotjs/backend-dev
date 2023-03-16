@@ -34,75 +34,46 @@
 //APIS AND RESTFUL API DESIGN
 //HANDLING GET REQUEST
 const express = require("express");
-const fs = require("fs");
-const studentData = JSON.parse(
-  fs.readFileSync("./dev-data/students-data.json", "utf-8")
-);
+const morgan = require("morgan");
+const studentRouter = require("./Routes/studentRoute")
+
 const port = 5000;
 const app = express();
 
 //INCLUDING OUR FIRST MIDDLEWARE
 app.use(express.json());
 app.use((req, res, next) => {
-  console.log("Hello from the second middleware");
-  next()
-})
-app.use((req, res, next) => {
-  console.log("hello from the middleware");
+  console.log("Hello from the  middleware");
   next();
 });
-
+app.use(morgan("dev"));
 //HANDLING GET REQUEST
-const getAllStudents = (req, res) => {
-  res.json({
-    status: "Success",
-    expectedresult: studentData.length,
-    result: { studentData },
-  });
+
+//HANDLER FUNCTIONS FOR TEACHER RESOURCE
+const getAllTeachers = (req, res) => {
+  res.status(501).json({
+    message : "resource is not available right now"
+  })
 };
-//HANDLING POST REQUEST
-const createNewStudents = (req, res) => {
-  const newId = studentData.at(-1).id + 1;
-  const newStudent = Object.assign({ id: newId }, req.body);
-  studentData.push(newStudent);
-  fs.writeFile(
-    `${__dirname}/dev-data/students-data.json`,
-    JSON.stringify(studentData),
-    (err) => {
-      console.log("We are done writing..");
-    }
-  );
-  // console.log(newId)
-  // const newId = studentData.length - 1
-  res.send("We are done posting");
+const createNewTeachers = (req, res) => {
+  res.status(501).json({
+    message : "resource is not available right now"
+  })
 };
-//RESPONDING TO PARAMETERS
-const getParticularStudent = (req, res) => {
-  if (+req.params.id > studentData.length) {
-    return res.status(404).json({
-      result: "Request failed",
-    });
-  }
-  // req.params.bunny
-  const student = studentData.find((currentEl) => {
-    return currentEl.id === +req.params.id;
-  });
-  // res.status(200).json({
-  //   data: {
-  //     student,
-  //   },
-  // });
+const updateTeacher = (req, res) => {
+  res.status(501).json({
+    message : "resource is not available right now"
+  })
 };
-//HANDLING PATCH REQUEST
-const updateStudent = (req, res) => {
-  // res.send("This Update has been completed");
-  console.log("hello")
+const getParticularTeacher = (req, res) => {
+  res.status(501).json({
+    message : "resource is not available right now"
+  })
 };
-//HANDLING DELETE  REQUEST
-const deleteStudent = (req, res) => {
-  res.status(400).json({
-    data: null,
-  });
+const deleteTeacher = (req, res) => {
+  res.status(501).json({
+    message : "resource is not available right now"
+  })
 };
 // app.get("/api/students", getAllStudents);
 // app.post("/api/students",createNewStudents );
@@ -110,16 +81,17 @@ const deleteStudent = (req, res) => {
 // app.patch("/api/students/:id", updateStudent);
 // app.delete("/api/students/:id", deleteStudent);
 
-app.route("/api/students").post(createNewStudents).get(getAllStudents);
+app.use("/api/students",studentRouter)
 
+//
+
+app.route("/api/teachers").post(createNewTeachers).get(getAllTeachers);
 app
-  .route("/api/students/:id")
-  .get(getParticularStudent)
-  .patch(updateStudent)
-  .delete(deleteStudent);
-  // 
+  .route("/api/teachers/:id")
+  .get(getParticularTeacher)
+  .patch(updateTeacher)
+  .delete(deleteTeacher);
 
-  
 // function test (x,y,z){
 // console.log(x,y,z)
 // }
