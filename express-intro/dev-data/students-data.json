@@ -1,5 +1,5 @@
 [
-  { "id": 1, "name": "Afo Charles", "stack": "LAMP" },
+  { "id": 1, "name": "Afo Charles", "stack": "LAMP"},
   { "id": 2, "name": "Chinma Francis", "stack": "PEAN" },
   { "id": 3, "name": "Ogunyileka Feranmi", "stack": "MERN" },
   { "id": 4, "name": "Faremi Tunde", "stack": "LAMP" },
