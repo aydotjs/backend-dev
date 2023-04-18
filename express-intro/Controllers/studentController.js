@@ -1,56 +1,99 @@
-const fs = require("fs");
-const studentData = JSON.parse(
-    fs.readFileSync("./dev-data/students-data.json", "utf-8")
-  );
+const Student = require("./../Model/studentModel");
+//HANDLING THE GET REQUEST
 exports.getAllStudents = (req, res) => {
-    res.json({
-      status: "Success",
-      expectedresult: studentData.length,
-      result: { studentData },
-    });
-  };
-  //HANDLING POST REQUEST
- exports.createNewStudents = (req, res) => {
-    const newId = studentData.at(-1).id + 1;
-    const newStudent = Object.assign({ id: newId }, req.body);
-    studentData.push(newStudent);
-    fs.writeFile(
-      `${__dirname}/dev-data/students-data.json`,
-      JSON.stringify(studentData),
-      (err) => {
-        console.log("We are done writing..");
-      }
-    );
-    // console.log(newId)
-    // const newId = studentData.length - 1
-    res.send("We are done posting");
-  };
-  //RESPONDING TO PARAMETERS
- exports.getParticularStudent = (req, res) => {
-    if (+req.params.id > studentData.length) {
-      return res.status(404).json({
-        result: "Request failed",
+  const allStudents = Student.find();
+  allStudents
+    .then((students) => {
+      res.status(200).json({
+        message: "Students information successfully delivered",
+        data: students,
       });
-    }
-    // req.params.bunny
-    const student = studentData.find((currentEl) => {
-      return currentEl.id === +req.params.id;
+    })
+    .catch((err) => {
+      res.status(404).json({
+        message: "Students information not delivered",
+        error: `${err}`,
+      });
     });
+};
+//HANDLING POST REQUEST
+
+exports.createNewStudents = async (req, res) => {
+  try {
+    const student1 = new Student(req.body);
+    const document = await student1.save();
+    res.json({
+      message: "We are done posting",
+      data: document,
+    });
+    /*
+      .then((doc) => {
+        console.log(doc);
+      })
+      .catch(() => {
+        console.log("there was an error");
+      });
+    res.json({
+      message: "We are done posting",
+    });
+    */
+  } catch (err) {
+    res.json({
+      errorObj: err,
+      message: "there was an error",
+    });
+  }
+};
+//RESPONDING TO PARAMETERS
+exports.getParticularStudent = async (req, res) => {
+  try{
+    const student = Student.findById(req.params.id);
+    const particularStudent = await student;
     res.status(200).json({
-      data: {
-        student,
-      },
+      message: "Students information successfully delivered",
+      data: particularStudent,
     });
-  };
-  //HANDLING PATCH REQUEST
-  exports.updateStudent = (req, res) => {
-    res.send("This Update has been completed");
-    console.log("hello");
-  };
-  //HANDLING DELETE  REQUEST
+  }catch(err){
+    res.status(404).json({
+      message: "Students information not found",
+      data: particularStudent,
+    });
+  }
+
+};
+
+//HANDLING PATCH REQUEST
+exports.updateStudent = (req, res) => {
+  const updatedInfo = Student.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+  updatedInfo
+    .then((studentUpdate) => {
+      res.status(200).json({
+        message: "Students information successfully delivered",
+        data: studentUpdate,
+      });
+    })
+    .catch((err) => {
+      res.status(404).json({
+        message: "Students information failed to update",
+        error: err,
+      });
+    });
+};
+//HANDLING DELETE  REQUEST
 exports.deleteStudent = (req, res) => {
-    res.status(400).json({
-      data: null,
+  const deleteInfo = Student.findByIdAndDelete(req.params.id);
+  deleteInfo
+    .then(() => {
+      res.status(204).json({
+        message: "Document has been successfully deleted",
+      });
+    })
+    .catch((err) => {
+      res.status(404).json({
+        message: "Document failed to delete",
+      });
     });
-  };
+};
 

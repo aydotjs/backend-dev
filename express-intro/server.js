@@ -13,34 +13,8 @@ mongoose
     useUnifiedTopology: true,
     useFindAndModify: false,
   })
-  .then((conn) => {console.log("coonection successful")});
-const studentSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, "A student must have a name"],
-    unique: true,
-  },
-  age: {
-    type: Number,
-    required : true
-  },
-  stack: {
-    type: String,
-    required: [true, "A student must have a stack"],
-  },
-});
-const Student = mongoose.model("student", studentSchema);
-const student1 = new Student({
-  name: "Ade Ade",
-  stack : "MEAN"
-});
-student1
-  .save()
-  .then((doc) => {
-    console.log(doc);
-  })
-  .catch((err) => {
-    console.log("there was an error", err);
+  .then((conn) => {
+    console.log("coonection successful");
   });
 app.listen(port, () => {
   console.log("server is listening");
